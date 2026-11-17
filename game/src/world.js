@@ -574,5 +574,9 @@ export function createWorld(random) {
     return events;
   }
 
+  // A fresh world is a reset world: the title screen's attract mode steps it before any
+  // game starts, so the player and the empty sky must exist from the beginning.
+  reset();
+
   return { state, reset, startWave, step };
 }
