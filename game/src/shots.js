@@ -88,6 +88,15 @@ export function stageShot(name, world) {
     for (let i = 0; i < PLAY_SECONDS / STEP; i += 1) {
       if (world.step(STEP, pilot(state, false), false) & EV_OVER) break;
     }
+    // A fixed run can end on a lull between waves; play on a little (bounded) until the
+    // action is properly on screen — several enemies inside the field, some already deep
+    // into it, and no banner covering the middle — so the frame shows the game in full swing.
+    for (let i = 0; i < 14 / STEP && !state.over; i += 1) {
+      const visible = state.enemies.filter((e) => e.y > 30);
+      const deep = visible.filter((e) => e.y > 250).length;
+      if (visible.length >= 4 && deep >= 2 && state.banner === null) break;
+      world.step(STEP, pilot(state, false), false);
+    }
     return { screen: state.over ? SCREEN_OVER : SCREEN_PLAY, best: state.score };
   }
   for (let i = 0; i < END_LIMIT_SECONDS / STEP; i += 1) {

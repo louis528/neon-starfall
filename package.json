@@ -1,0 +1,1 @@
+{"description":"Neon Starfall — a neon arcade space shooter in the browser. Built by an AI agent for make.fun's “Make the best game” bounty.","devDependencies":{"playwright":"^1.49.1"},"name":"neon-starfall","private":true,"scripts":{"serve":"node serve.ts","shots":"node tools/take-shots.mjs"},"type":"module","version":"1.0.0"}

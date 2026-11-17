@@ -193,7 +193,7 @@ export function createRenderer(canvas) {
     ctx.rotate(e.rot);
     const grad = ctx.createRadialGradient(-e.radius * 0.3, -e.radius * 0.3, e.radius * 0.2, 0, 0, e.radius * 1.15);
     grad.addColorStop(0, '#c97a2e');
-    grad.addColorStop(1, ASTEROID_DARK_HEX);
+    grad.addColorStop(1, PALETTE.asteroidDark);
     ctx.fillStyle = e.flash > 0 ? '#ffffff' : grad;
     ctx.beginPath();
     const n = e.verts.length;
@@ -418,7 +418,7 @@ export function createRenderer(canvas) {
     text('PAUSE', cx - 278, 510, 19, PALETTE.player, 'left', true);
     text('P — grab spread, shield & lives as they fall', cx - 176, 510, 19, PALETTE.text, 'left');
     if (best > 0) text(`BEST SCORE  ${best}`, cx, 606, 20, PALETTE.bullet, 'center', true);
-    const blink = 0.55 + Math.sin(state.time * 4.2) * 0.45;
+    const blink = 0.74 + Math.sin(state.time * 4.2) * 0.26;
     ctx.globalAlpha = blink;
     text('PRESS ENTER OR CLICK TO LAUNCH', cx, 664, 24, PALETTE.text, 'center', false, 800);
     ctx.globalAlpha = 1;
@@ -436,7 +436,7 @@ export function createRenderer(canvas) {
     text(`SCORE  ${state.score}`, cx, 378, 40, PALETTE.text, 'center', true);
     text(state.score >= best && state.score > 0 ? `NEW BEST!` : `BEST  ${best}`, cx, 428, 22, PALETTE.bullet, 'center', true);
     text(`REACHED WAVE ${Math.max(1, state.wave)}`, cx, 472, 20, PALETTE.muted, 'center', true);
-    const blink = 0.55 + Math.sin(state.time * 4.2) * 0.45;
+    const blink = 0.74 + Math.sin(state.time * 4.2) * 0.26;
     ctx.globalAlpha = blink;
     text('PRESS ENTER OR CLICK TO RETRY', cx, 566, 23, PALETTE.text, 'center', false, 800);
     ctx.globalAlpha = 1;
@@ -566,5 +566,3 @@ export function createRenderer(canvas) {
     },
   };
 }
-
-const ASTEROID_DARK_HEX = '#5e3208';
